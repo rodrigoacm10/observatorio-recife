@@ -33,13 +33,13 @@ const PortosPage = () => {
 
   useEffect(() => {
     const tab = searchParams.get("tab");
+
     if (tab && tab !== activeTab) {
       setActiveTab(tab);
     } else if (!tab) {
-      setActiveTab('geral');
-      router.replace(`?tab=geral`);
+      router.replace("?tab=geral");
     }
-  }, [searchParams, activeTab, router]);
+  }, [searchParams, router]);  
 
     useEffect(() => {
       if (data && data.id === "porto" && "filteredData" in data.accumulated) {

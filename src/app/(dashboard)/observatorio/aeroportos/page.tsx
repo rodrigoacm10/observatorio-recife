@@ -28,7 +28,7 @@ const AeroportosPage = () => {
 
     if (tab && tab !== activeTab) {
       setActiveTab(tab);
-    } else if (!tab && activeTab !== "geral") {
+    } else if (!tab) {
       router.replace("?tab=geral");
     }
   }, [searchParams, router]);  
