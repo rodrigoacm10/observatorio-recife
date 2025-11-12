@@ -96,17 +96,17 @@ const TableGeneric: React.FC<PaginatedTableProps> = ({
   };
 
   useEffect(() => {
-    const blocks = getSplitedDataInBlocks(currentRows);
-    setDataRead((getRows ? getRows(blocks[0]) : blocks[0]) || []);
+    const blocks = getSplitedDataInBlocks(rows);
+    setDataRead(getRows ? getRows(blocks[0]) : blocks[0]);
     setBlocksCount(1);
-  }, [currentRows]);  
+  }, [rows]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollRef.current) return;
       const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
 
-     if (scrollTop + clientHeight >= scrollHeight) {
+      if (scrollTop + clientHeight >= scrollHeight) {
         setBlocksCount((prev) => {
           if (prev < getSplitedDataInBlocks(currentRows).length) {
             setDataRead(getRows ? getRows(currentRows.slice(0, (prev + 1) * 100)) : currentRows.slice(0, (prev + 1) * 100));
@@ -114,20 +114,15 @@ const TableGeneric: React.FC<PaginatedTableProps> = ({
           }
           return prev;
         });
-      } 
+      }
     };
 
     const scrollElement = scrollRef.current;
-    if (scrollElement) {
-      scrollElement.addEventListener("scroll", handleScroll);
-    }
+    scrollElement?.addEventListener("scroll", handleScroll);
 
-    return () => {
-      if (scrollElement) {
-        scrollElement.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [dataRead]); 
+    return () => scrollElement?.removeEventListener("scroll", handleScroll);
+  }, [currentRows]);
+
 
   return (
     <div className="bg-none">
