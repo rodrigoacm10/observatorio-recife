@@ -9,6 +9,7 @@ import ColorPalette from "@/utils/palettes/charts/ColorPalette";
 
 import charts from "./@imports/charts";
 import tables from "./@imports/tables";
+import { getKeyByValue } from "@/utils/filters/@global/getInverseObject";
 
 const Salario = ({
   year,
@@ -63,6 +64,13 @@ const Salario = ({
     setChartData(dataFiltred)
   }, [data])
 
+  console.log('tempFiltred -><>', tempFiltred)
+  console.log('tempFiltredCBO -><>', tempFiltredCBO)
+  console.log('Profissao -><>',   [
+    ...tempFiltred,
+    ...tempFiltredCBO.map((cbo) => Number(getKeyByValue(microCagedCboDicts, cbo))),
+  ])
+
   return (
     <div>
       <div className="">
@@ -111,10 +119,13 @@ const Salario = ({
                 </p>
                 <div
                   className="bg-white shadow-md rounded-lg flex flex-col items-center w-full min-h-[800px]"
-                >
-          
+                > 
+                  
                     <Component
-                      profissao={[...tempFiltred, ...tempFiltredCBO.map((cbo) => microCagedCboDicts[cbo])]}
+                      profissao={[
+                        ...tempFiltred.map(value => Number(value)),
+                        ...tempFiltredCBO.map((cbo) => Number(getKeyByValue(microCagedCboDicts, cbo))),
+                      ]}
                       color={ColorPalette.default[index]}
                       data={chartData.filter((obj: any) => obj['município'] === selectCompare[index])}
                       year={year}
