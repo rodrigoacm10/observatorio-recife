@@ -24,14 +24,14 @@ const AeroportosPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-      const tab = searchParams.get("tab");
-      if (tab && tab !== activeTab) {
-        setActiveTab(tab);
-      } else if (!tab) {
-        setActiveTab('geral');
-        router.replace(`?tab=geral`);
-      }
-    }, [searchParams, activeTab, router]);
+    const tab = searchParams.get("tab");
+
+    if (tab && tab !== activeTab) {
+      setActiveTab(tab);
+    } else if (!tab && activeTab !== "geral") {
+      router.replace("?tab=geral");
+    }
+  }, [searchParams, router]);  
 
   useEffect(() => {
       const intervalId = setInterval(() => {
@@ -95,8 +95,11 @@ const AeroportosPage = () => {
     }
   };
 
-  const handleNavigation = async (tab: string) => {
-    router.replace(`?tab=${tab}`);
+  const handleNavigation = (tab: string) => {
+    if (tab !== activeTab) {
+      setActiveTab(tab);
+      router.replace(`?tab=${tab}`);
+    }
   };
 
   if (isLoading) return <LoadingScreen />;

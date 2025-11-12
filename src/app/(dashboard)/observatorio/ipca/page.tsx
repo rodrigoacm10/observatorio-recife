@@ -71,10 +71,12 @@ const IpcaPage = () => {
     }
   };
 
-  const handleNavigation = async (tab: string) => {
-    router.replace(`?tab=${tab}`);
+  const handleNavigation = (tab: string) => {
+    if (tab !== activeTab) {
+      setActiveTab(tab);
+      router.replace(`?tab=${tab}`);
+    }
   };
-
   if (isLoading) return <LoadingScreen />;
 
   return (
