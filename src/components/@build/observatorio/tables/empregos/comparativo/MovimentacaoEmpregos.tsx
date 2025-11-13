@@ -1,11 +1,20 @@
 import { useState } from "react";
 
 import TableGeneric from "@/components/@global/tables/TableGeneric";
-import { rowsProfissao } from "@/functions/process_data/observatorio/rais/remuneracao/rowsProfissao";
 import { tooltipFormatter } from "@/utils/formatters/@global/graphFormatter";
 import { monthShortName } from "@/utils/formatters/@global/monthShortName";
-import { formatNumber } from "@/utils/formatters/@global/numberFormatter";
 import { percentFormatter } from "@/utils/formatters/@global/percentFormatter";
+
+function formatToPercentage(value: number): string {
+  // Corrige o fator de escala (aumentamos mil vezes o divisor)
+  const percentage = value / 1_000_000_000_000_000_000; 
+
+  // Formata com duas casas e símbolo de porcentagem
+  const formatted = (percentage * 100).toFixed(2);
+
+  // Retorna com sinal correto
+  return `${formatted}%`;
+}
 
 const MovimentacaoEmpregos = ({
   data = [],
@@ -20,9 +29,13 @@ const [ordenation, setOrdenation] = useState([{ index: 0, name: 'Mês', ordenati
 
 // Mês - Admissões - Demissões - Saldos - Estoque - Variação
 
+// console.log('DATA ->><>', formatToPercentages(data.map((item: any) => item['Variação'])))
+
 const order = ordenation.find((item) => item.ordenation != 0)
 
 const aggregatedData = ((data || []).sort((a: any, b: any) => a?.['Mês'] - b?.['Mês']) || [])
+
+console.log('AGGREGATED DATA ->><>', aggregatedData)
 
 const dataSorted = order ? aggregatedData.sort((a: any, b: any) => order.ordenation === 1 ? a[order.name] - b[order.name] : b[order.name] - a[order.name]) : aggregatedData
 
@@ -44,7 +57,7 @@ const dataSorted = order ? aggregatedData.sort((a: any, b: any) => order.ordenat
         tooltipFormatter(obj["Demissões"]),
         tooltipFormatter(obj["Saldos"]),
         tooltipFormatter(obj["Estoque"]),
-        `${percentFormatter(obj["Variação"])}%`
+        `${formatToPercentage(obj["Variação"])}`
       ]);
     });
     return rows;

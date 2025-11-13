@@ -15,8 +15,8 @@ const DecolagensIntEmbarque = ({
   title = "Internacional Decolagens",
   colors = ColorPalette.default,
   monthRecent,
-  subText = 'País Destino',
-  type
+  type,
+  subText = `País ${type === 'Embarque' ? 'Destino' : "Origem"}`,
 }: ChartBuild<AnacChartData>) => {
 
   const chartData = processEmbarqueDesembarqueNaturezaTipo(

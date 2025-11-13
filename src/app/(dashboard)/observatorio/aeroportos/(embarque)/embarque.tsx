@@ -12,7 +12,7 @@ const Embarque: React.FC<ChartBuild<AnacChartData>> = ({
   monthRecent,
   data,
 }) => {
-  const [type, setType] = useState(['Embarque']);
+  const [type, setType] = useState('Embarque');
   const [chartOrder, setChartOrder] = useState(charts.map((_, index) => index));
 
   const sortableContainerRef = useRef<HTMLDivElement>(null);
@@ -22,23 +22,23 @@ const Embarque: React.FC<ChartBuild<AnacChartData>> = ({
       <div className="flex items-center justify-center mb-6"> 
           <div className="bg-[#D1D5DB] dark:bg-gray-600 rounded-full p-1">
             <div className="bg-white dark:bg-gray-800 rounded-full font-semibold items-center grid grid-cols-2  gap-2 text-center relative text-gray-500 dark:text-gray-400 p-2">
-             <div className={`transition duration-300 absolute bg-gradient-to-r from-blue-500 to-blue-700 w-1/2 h-full rounded-full ${type[0] === 'Embarque' ? 'transform translate-x-0' : 'transform translate-x-full'} p-4 `}></div>
+             <div className={`transition duration-300 absolute bg-gradient-to-r from-blue-500 to-blue-700 w-1/2 h-full rounded-full ${type === 'Embarque' ? 'transform translate-x-0' : 'transform translate-x-full'} p-4 `}></div>
              <button onClick={() => {
-              if (type[0] !== 'Embarque') {
-                setType(['Embarque'])
-              } else if (type[0] === 'Embarque') {
-                setType(['Desembarque'])
+              if (type !== 'Embarque') {
+                setType('Embarque')
+              } else if (type === 'Embarque') {
+                setType('Desembarque')
               }
-              }} className={`${type[0] === 'Embarque' && 'text-white'} z-20 px-3`}>
+              }} className={`${type === 'Embarque' && 'text-white'} z-20 px-3`}>
               Embarque
              </button>
              <button onClick={() => {
-              if (type[0] !== 'Desembarque') {
-                setType(['Desembarque'])
-              } else if (type[0] === 'Desembarque') {
-                setType(['Embarque'])
+              if (type !== 'Desembarque') {
+                setType('Desembarque')
+              } else if (type === 'Desembarque') {
+                setType('Embarque')
               }
-              }} className={`${type[0] === 'Desembarque' && 'text-white'} z-20 px-3`}>
+              }} className={`${type === 'Desembarque' && 'text-white'} z-20 px-3`}>
               Desembarque
              </button>
           </div>
@@ -58,7 +58,7 @@ const Embarque: React.FC<ChartBuild<AnacChartData>> = ({
                   toCompare={toCompare ?? []}
                   data={data}
                   months={monthRecent ?? 1}
-                  type={type[0] as "Embarque" | "Desembarque"}
+                  type={type as "Embarque" | "Desembarque"}
                 />
               </React.Suspense>
             </div>

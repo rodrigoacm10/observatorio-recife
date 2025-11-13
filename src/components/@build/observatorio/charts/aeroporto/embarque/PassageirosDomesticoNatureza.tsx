@@ -15,8 +15,8 @@ const PassageirosEmbarqueDom = ({
   title = "Doméstico Passageiros",
   colors = ColorPalette.default,
   monthRecent,
-  subText = 'UF Destino',
-  type
+  type,
+  subText = `UF ${type === 'Embarque' ? 'Destino' : "Origem"}`,
 }: ChartBuild<AnacChartData>) => {
   // Assumimos que o filtro de dados (ano, etc.) já foi aplicado antes de passar para o componente.
   const chartData = processEmbarqueDesembarqueNaturezaTipo(

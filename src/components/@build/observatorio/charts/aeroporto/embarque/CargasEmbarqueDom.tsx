@@ -15,8 +15,8 @@ const CargasEmbarqueDom = ({
   title = "Doméstico Cargas (ton)",
   colors = ColorPalette.default,
   monthRecent,
-  subText = 'UF Destino',
-  type
+  type,
+  subText = `UF ${type === 'Embarque' ? 'Destino' : "Origem"}`,
 }: ChartBuild<AnacChartData>) => {
 
   const chartData = processEmbarqueDesembarqueNaturezaTipo(

@@ -15,8 +15,9 @@ const CargasIntEmbarque = ({
   title = "Internacional Cargas (ton)",
   colors = ColorPalette.default,
   monthRecent,
-  subText = 'País Destino',
-  type
+  type,
+  subText = `País ${type === 'Embarque' ? 'Destino' : "Origem"}`,
+  
 }: ChartBuild<AnacChartData>) => {
 
   const chartData = processEmbarqueDesembarqueNaturezaTipo(
