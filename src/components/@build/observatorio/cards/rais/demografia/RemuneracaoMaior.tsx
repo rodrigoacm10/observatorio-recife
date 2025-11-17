@@ -18,6 +18,8 @@ const RemuneracaoMaior = ({
       data={chartData}
       year={year}
       color={color}
+      monetary
+
     />
   );
 };

@@ -18,6 +18,7 @@ const DiversidadeTotalEmpregos = ({
       data={chartData}
       year={year}
       color={color} 
+      monetary
     />
   );
 };

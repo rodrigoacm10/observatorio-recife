@@ -18,6 +18,7 @@ const DiversidadeRemuneracaoMedia = ({
       data={chartData}
       year={year}
       color={color}
+      monetary
     />
   );
 };

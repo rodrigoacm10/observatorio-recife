@@ -18,6 +18,8 @@ const RemuneracaoMedia = ({
       data={chartData}
       year={year}
       color={color}
+      monetary
+
     />
   );
 };

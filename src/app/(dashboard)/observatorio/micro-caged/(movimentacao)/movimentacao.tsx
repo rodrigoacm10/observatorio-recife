@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { SortableDiv } from "@/components/@global/features/SortableDiv";
 import GraphSkeleton from "@/components/random_temp/GraphSkeleton";
 import { geralAccFunction } from "@/functions/process_data/observatorio/rais/demografia/geralFuncition";
-import { getObjToArr } from "@/utils/formatters/getObjToArr";
 import ErrorBoundary from "@/utils/loader/errorBoundary";
 import ColorPalette from "@/utils/palettes/charts/ColorPalette";
 

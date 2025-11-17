@@ -18,6 +18,7 @@ const TotalEmpregos = ({
       data={chartData}
       year={year}
       color={color}
+      monetary
     />
   );
 };
