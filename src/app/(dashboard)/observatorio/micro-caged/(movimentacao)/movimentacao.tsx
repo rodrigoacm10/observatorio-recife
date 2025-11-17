@@ -21,13 +21,19 @@ const Movimentacao = ({
   const [chartOrder, setChartOrder] = useState(charts.map((_, index) => index));
   const sortableContainerRef = useRef<HTMLDivElement>(null);
   const [chartData, setChartData] = useState({})
+  const [cardData, setCardData] = useState({})
 
   useEffect(() => {
-    const geralInfos = geralAccFunction(data || [], ['salário', 'saldomovimentação', "tamestabjan", "graudeinstrução", "sexo", "seção", "raçacor", "horascontratuais", "idade"])
-    const womanInfos = { saldoMulher: geralAccFunction(data.filter((item: any) => item["sexo"] === "Mulher") || [], ['saldomovimentação' ])}
-    const manInfos = { saldoHomem: geralAccFunction(data.filter((item: any) => item["sexo"] === "Homem") || [], ['saldomovimentação' ])}
+    const geralInfos = geralAccFunction(data.geral || [], ['salário', 'saldomovimentação', "tamestabjan", "graudeinstrução", "sexo", "seção", "raçacor", "horascontratuais", "idade"])
+    const womanInfos = { saldoMulher: geralAccFunction(data.geral.filter((item: any) => item["sexo"] === "Mulher") || [], ['saldomovimentação' ])}
+    const manInfos = { saldoHomem: geralAccFunction(data.geral.filter((item: any) => item["sexo"] === "Homem") || [], ['saldomovimentação' ])}
+
+    const geralInfosCard = geralAccFunction(data.card || [], ['salário', 'saldomovimentação', "tamestabjan", "graudeinstrução", "sexo", "seção", "raçacor", "horascontratuais", "idade"])
+    const womanInfosCard = { saldoMulher: geralAccFunction(data.card.filter((item: any) => item["sexo"] === "Mulher") || [], ['saldomovimentação' ])}
+    const manInfosCard = { saldoHomem: geralAccFunction(data.card.filter((item: any) => item["sexo"] === "Homem") || [], ['saldomovimentação' ])}
 
     setChartData({ ...geralInfos, ...womanInfos, ...manInfos })
+    setCardData({ ...geralInfosCard, ...womanInfosCard, ...manInfosCard })
   }, [data])
 
   return (
@@ -37,7 +43,7 @@ const Movimentacao = ({
           <React.Suspense fallback={<div>Carregando...</div>} key={index}>
             <ErrorBoundary>
               <Component
-                data={chartData}
+                data={cardData}
                 year={year}
                 color={ColorPalette.default[index]}
               />

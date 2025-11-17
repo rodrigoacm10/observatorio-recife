@@ -23,15 +23,22 @@ const Saldo = ({
   const [chartOrder, setChartOrder] = useState(charts.map((_, index) => index));
   const sortableContainerRef = useRef<HTMLDivElement>(null);
   const [chartData, setChartData] = useState({})
+  const [cardData, setCardData] = useState({})
   
 
   useEffect(() => {
-    const dataAdmitidos = getDataObj(data.filter((obj: any) => obj['saldomovimentação'] === "Admitidos"))
-    const dataDemitidos = getDataObj(data.filter((obj: any) => obj['saldomovimentação'] === "Demitidos"))
+    const dataAdmitidos = getDataObj(data?.geral.filter((obj: any) => obj['saldomovimentação'] === "Admitidos"))
+    const dataDemitidos = getDataObj(data?.geral.filter((obj: any) => obj['saldomovimentação'] === "Demitidos"))
 
     const dataSaldo = getSaldoData(dataAdmitidos, dataDemitidos)
 
+    const dataAdmitidosCard = getDataObj(data?.card.filter((obj: any) => obj['saldomovimentação'] === "Admitidos"))
+    const dataDemitidosCard = getDataObj(data?.card.filter((obj: any) => obj['saldomovimentação'] === "Demitidos"))
+
+    const dataSaldoCard = getSaldoData(dataAdmitidosCard, dataDemitidosCard)
+
     setChartData(dataSaldo)
+    setCardData(dataSaldoCard)
   }, [data])
 
   return (
@@ -41,7 +48,7 @@ const Saldo = ({
           <React.Suspense fallback={<div>Carregando...</div>} key={index}>
             <ErrorBoundary>
               <Component
-                data={chartData}
+                data={cardData}
                 year={year}
                 color={ColorPalette.default[index]}
               />

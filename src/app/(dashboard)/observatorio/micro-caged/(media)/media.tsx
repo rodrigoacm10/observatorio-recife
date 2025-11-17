@@ -28,11 +28,11 @@ const Media = ({
   useEffect(() => {
     // nesse 1518, temos q pegar a primeira linha data[0] e pegar oa param sm (salário minimo) data[0]['sm'], ele vai retornar o valor do salário minimo
     // const dataFiltred = data.filter((obj: any) => obj['indtrabintermitente'] == 0 && obj['salário'] > 1518 * 0.3 && obj['salário'] < 1518 * 150)
-    const dataFiltred = getSmFiltred(data)
+    const dataFiltred = getSmFiltred(data.geral)
 
     const dataObj = getDataObj(dataFiltred)
 
-    const keysObj = Object.keys(data?.[0] || []).filter(key => !['salário', 'competênciamov', 'ano', 'município', 'unidadesaláriocódigo', 'valorsaláriofixo'].includes(key))
+    const keysObj = Object.keys(data?.geral?.[0] || []).filter(key => !['salário', 'competênciamov', 'ano', 'município', 'unidadesaláriocódigo', 'valorsaláriofixo'].includes(key))
 
     const dataSalario = getAccSalario(dataFiltred, keysObj)
 

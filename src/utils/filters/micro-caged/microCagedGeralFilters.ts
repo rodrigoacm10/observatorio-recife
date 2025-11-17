@@ -18,6 +18,11 @@ export const microCagedGeralFilters = {
         selected: [],
       },
       {
+        label: "sexo",  
+        options: [],  
+        selected: [],
+      },
+      {
         label: "grupamento",
         options: ['Indústria', 'Comércio', 'Agropecuária', 'Serviços', 'Construção'],  
         selected: [],

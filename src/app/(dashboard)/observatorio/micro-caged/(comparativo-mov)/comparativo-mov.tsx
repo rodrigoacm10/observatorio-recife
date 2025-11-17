@@ -17,7 +17,7 @@ const ComparativoMov = ({
   year,
   data,
   toCompare = getUniqueValues<any, "município">(
-    data,
+    data?.geral,
     "município"
   )
 }: {
@@ -42,7 +42,7 @@ const ComparativoMov = ({
     const dataMuni: { [key: string]: any } = {}
 
      toCompare.map((muni: string) => {
-      const dataFiltred = data?.filter((micro: any) => micro['município'] === muni) || []
+      const dataFiltred = data?.geral?.filter((micro: any) => micro['município'] === muni) || []
       if (!dataMuni[muni]) dataMuni[muni] = {}  
 
       const dataAdmitidos = geralAccFunction(dataFiltred.filter((obj: any) => obj['saldomovimentação'] === "Admitidos") || [], ['mês'])

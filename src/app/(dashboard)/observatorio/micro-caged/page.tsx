@@ -39,13 +39,14 @@ const MicroCagedPage = () => {
     const intervalId = setInterval(() => {
         
         if (data?.id === 'empregos-micro-caged' as 'porto') {
-          const microCagedData = data?.microCaged || [];
+          const microCagedData = data?.microCaged.geral || [];
+          const microCagedDataCard = data?.microCaged.card || [];
 
-          setMicroCaged(microCagedData.filteredData);
+          setMicroCaged({ geral: microCagedData.filteredData, card: microCagedDataCard?.filteredData });
 
           clearInterval(intervalId);
         } else {
-            setMicroCaged([]);
+            setMicroCaged({ geral: [], card: [] });
           }
 
         if (data?.id === 'empregos-micro-caged-media' as 'porto') {
@@ -67,7 +68,7 @@ const MicroCagedPage = () => {
 
     
   const renderContent = () => {
-    if (!data || !(microCaged?.length || microCagedMedia?.current?.length) ) {
+    if (!data || !(microCaged?.geral?.length || microCagedMedia?.current?.length) ) {
       return <div className="text-center text-gray-600">Construindo gráficos...</div>;
     }
 

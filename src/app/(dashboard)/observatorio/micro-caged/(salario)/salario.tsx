@@ -15,11 +15,11 @@ const Salario = ({
   year,
   data,
   toCompare = getUniqueValues<any, "cbo2002ocupação">(
-    data,
+    data?.geral,
     "cbo2002ocupação"
   ),
   toCompareMuni = getUniqueValues<any, "município">(
-    data,
+    data?.geral,
     "município"
   ),
 }: {
@@ -59,17 +59,10 @@ const Salario = ({
   useEffect(() => {
     // primeiro vou passar um loop no campo de salário minio para pegar os valores dos salários minimos no ano, e vou selecioanr o menor valor e subistituir pelo 1518
     // const dataFiltred = data.filter((obj: any) => obj['indtrabintermitente'] == 0 && obj['salário'] >= 1518 * 0.3 && obj['salário'] <= 1518 * 150)
-    const dataFiltred = getSmFiltred(data)
+    const dataFiltred = getSmFiltred(data?.geral)
 
     setChartData(dataFiltred)
   }, [data])
-
-  console.log('tempFiltred -><>', tempFiltred)
-  console.log('tempFiltredCBO -><>', tempFiltredCBO)
-  console.log('Profissao -><>',   [
-    ...tempFiltred,
-    ...tempFiltredCBO.map((cbo) => Number(getKeyByValue(microCagedCboDicts, cbo))),
-  ])
 
   return (
     <div>

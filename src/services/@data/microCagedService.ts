@@ -36,8 +36,14 @@ export class MicroCagedDataService {
 
     const filteredData = applyGenericFilters(fetchData, filtersHashed, ['grupamento']);
 
+    const semiFilteredData = applyGenericFilters(fetchData, filtersHashed, ['grupamento', 'sexo', 'saldomovimentação'])
+
+
     return {
-      microCaged: filteredData,
+      microCaged: {
+        geral: filteredData,
+        card: semiFilteredData
+      },
       id: "empregos-micro-caged",
     };
   }
